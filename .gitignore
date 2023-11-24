@@ -1,0 +1,40 @@
+# Node.js
+node_modules/
+
+# Angular
+/dist/
+/e2e/*.log
+/e2e/*.png
+/e2e/*.mp4
+
+# VSCode
+.vscode/
+
+# WebStorm
+.idea/
+
+# Compiled TypeScript
+*.js
+*.js.map
+*.d.ts
+
+# Dependency directories
+/jspm_packages/
+/bower_components/
+
+# Docker
+Dockerfile
+docker-compose.yml
+
+# Visual Studio
+.vs/
+bin/
+obj/
+
+# Test generated files
+testem.log
+/test-output/
+
+# OS generated files
+.DS_Store
+Thumbs.db

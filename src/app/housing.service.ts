@@ -5,12 +5,13 @@ import { HousingLocation } from './housinglocation';
   providedIn: 'root',
 })
 export class HousingService {
+  private readonly backendUrl = 'http://localhost:3000';
   private readonly baseUrl = 'https://angular.dev/assets/tutorials/common';
 
-  url = 'http://localhost:3000/locations';
+  dbJsonUrl = 'http://localhost:3000/locations';
 
   async getAllHousingLocations() {
-    const data = await fetch(this.url);
+    const data = await fetch(this.dbJsonUrl);
     const housingLocationList: HousingLocation[] = await data.json();
     return housingLocationList.map((hl) => this.fixPhotoLink(hl)) ?? [];
   }
@@ -18,10 +19,32 @@ export class HousingService {
   async getHousingLocationById(
     id: number
   ): Promise<HousingLocation | undefined> {
-    const data = await fetch(`${this.url}/${id}`);
+    const data = await fetch(`${this.dbJsonUrl}/${id}`);
     const housingLocation: HousingLocation = await data.json();
     this.fixPhotoLink(housingLocation);
     return housingLocation ?? {};
+  }
+
+  async signUp(
+    name: string,
+    email: string,
+    password: string,
+    confirmPassword: string
+  ) {
+    const signUpUrl = `${this.backendUrl}/auth/signup`;
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name,
+        email,
+        password,
+        confirmPassword,
+      }) as BodyInit,
+    };
+    const data = await fetch(signUpUrl, requestOptions);
+    const access_token = await data.json();
+    console.log(access_token);
   }
 
   submitApplication(firstName: string, lastName: string, email: string) {

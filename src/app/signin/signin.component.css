@@ -1,0 +1,54 @@
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.listing {
+  background: var(--accent-color);
+  border-radius: 30px;
+  padding: 30px;
+  width: 420px;
+}
+.listing-features > .section-heading {
+  color: var(--secondary-color);
+  font-size: 24pt;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.listing-features {
+  margin-bottom: 20px;
+}
+
+.listing-apply .section-heading {
+  font-size: 18pt;
+  margin-bottom: 15px;
+}
+
+label,
+input {
+  display: block;
+}
+label {
+  color: var(--secondary-color);
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 12pt;
+}
+input {
+  font-size: 16pt;
+  margin-bottom: 15px;
+  padding: 10px;
+  width: 400px;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: solid 0.3px;
+}
+
+button.primary {
+  display: block;
+  width: 100%;
+  font-size: 1.4em;
+}

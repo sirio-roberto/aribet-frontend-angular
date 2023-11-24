@@ -1,0 +1,28 @@
+<main>
+  <article class="listing">
+    <section class="listing-features">
+      <h2 class="section-heading">Log into Aribet</h2>
+    </section>
+    <section class="listing-apply">
+      <form [formGroup]="applyForm" (submit)="submitApplication()">
+        <label for="name">Name</label>
+        <input id="name" type="text" formControlName="name" />
+
+        <label for="email">Email</label>
+        <input id="email" type="text" formControlName="email" />
+
+        <label for="password">Password</label>
+        <input id="password" type="password" formControlName="password" />
+
+        <label for="confirmPassword">Confirm password</label>
+        <input
+          id="confirmPassword"
+          type="password"
+          formControlName="confirmPassword"
+        />
+
+        <button type="submit" class="primary">Log In</button>
+      </form>
+    </section>
+  </article>
+</main>

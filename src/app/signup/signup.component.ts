@@ -1,19 +1,39 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { HousingService } from '../housing.service';
 import { HousingLocation } from '../housinglocation';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+  ],
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent {
+  hidePass = true;
   housingLocation: HousingLocation | undefined;
+
   applyForm = new FormGroup({
     name: new FormControl(''),
     email: new FormControl(''),
@@ -24,13 +44,7 @@ export class SignupComponent {
   constructor(
     private route: ActivatedRoute,
     private housingService: HousingService
-  ) {
-    // const housingLocationId = parseInt(this.route.snapshot.params['id'], 10);
-    const housingLocationId = 1;
-    this.housingService
-      .getHousingLocationById(housingLocationId)
-      .then((hl) => (this.housingLocation = hl));
-  }
+  ) {}
 
   signUp() {
     this.housingService.signUp(

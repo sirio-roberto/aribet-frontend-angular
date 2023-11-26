@@ -45,6 +45,7 @@ export class HousingService {
     const data = await fetch(signUpUrl, requestOptions);
     const access_token = await data.json();
     console.log(access_token);
+    return access_token;
   }
 
   submitApplication(firstName: string, lastName: string, email: string) {

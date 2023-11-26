@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HousingService } from '../housing.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -38,10 +38,11 @@ export class SignupComponent {
   constructor(
     private route: ActivatedRoute,
     private housingService: HousingService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {}
 
-  signUp() {
+  async signUp() {
     if (
       !this.applyForm.value.name ||
       !this.applyForm.value.email ||
@@ -59,12 +60,22 @@ export class SignupComponent {
     ) {
       this.showSnackBarError('Passwords do not match');
     } else {
-      this.housingService.signUp(
+      const backendResponse: any = await this.housingService.signUp(
         this.applyForm.value.name ?? '',
         this.applyForm.value.email ?? '',
         this.applyForm.value.password ?? '',
         this.applyForm.value.confirmPassword ?? ''
       );
+
+      if (backendResponse.access_token) {
+        this.router.navigate(['/']);
+      } else if (JSON.stringify(backendResponse).includes('email')) {
+        this.showSnackBarError(
+          'This email was already taken. Please use a different email'
+        );
+      } else {
+        this.showSnackBarError('Unknown error');
+      }
     }
   }
 

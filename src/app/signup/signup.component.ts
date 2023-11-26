@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { HousingService } from '../housing.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -9,6 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -36,10 +37,10 @@ export class SignupComponent {
   });
 
   constructor(
-    private route: ActivatedRoute,
     private housingService: HousingService,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   async signUp() {
@@ -68,6 +69,7 @@ export class SignupComponent {
       );
 
       if (backendResponse.access_token) {
+        this.authService.setToken(backendResponse.access_token);
         this.router.navigate(['/']);
       } else if (JSON.stringify(backendResponse).includes('email')) {
         this.showSnackBarError(

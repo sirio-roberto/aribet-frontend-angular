@@ -8,7 +8,7 @@ const routeConfig: Routes = [
   {
     path: '',
     component: HomeComponent,
-    title: 'Home page',
+    title: 'Home',
   },
   {
     path: 'details/:id',
@@ -18,12 +18,12 @@ const routeConfig: Routes = [
   {
     path: 'signin',
     component: SigninComponent,
-    title: 'Sign in page',
+    title: 'Sign in',
   },
   {
     path: 'signup',
     component: SignupComponent,
-    title: 'Sign up page',
+    title: 'Sign up',
   },
 ];
 

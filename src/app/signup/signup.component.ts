@@ -1,19 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { HousingService } from '../housing.service';
-import { HousingLocation } from '../housinglocation';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-signup',
@@ -32,7 +27,6 @@ import { MatCardModule } from '@angular/material/card';
 })
 export class SignupComponent {
   hidePass = true;
-  housingLocation: HousingLocation | undefined;
 
   applyForm = new FormGroup({
     name: new FormControl(''),
@@ -43,15 +37,41 @@ export class SignupComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private housingService: HousingService
+    private housingService: HousingService,
+    private snackBar: MatSnackBar
   ) {}
 
   signUp() {
-    this.housingService.signUp(
-      this.applyForm.value.name ?? '',
-      this.applyForm.value.email ?? '',
-      this.applyForm.value.password ?? '',
-      this.applyForm.value.confirmPassword ?? ''
-    );
+    if (
+      !this.applyForm.value.name ||
+      !this.applyForm.value.email ||
+      !this.applyForm.value.password ||
+      !this.applyForm.value.confirmPassword
+    ) {
+      this.showSnackBarError('Please fill in all required fields');
+    } else if (
+      this.applyForm.value.password.length < 6 ||
+      this.applyForm.value.confirmPassword.length < 6
+    ) {
+      this.showSnackBarError('Passwords should have at least 6 characters');
+    } else if (
+      this.applyForm.value.password !== this.applyForm.value.confirmPassword
+    ) {
+      this.showSnackBarError('Passwords do not match');
+    } else {
+      this.housingService.signUp(
+        this.applyForm.value.name ?? '',
+        this.applyForm.value.email ?? '',
+        this.applyForm.value.password ?? '',
+        this.applyForm.value.confirmPassword ?? ''
+      );
+    }
+  }
+
+  showSnackBarError(message: string) {
+    this.snackBar.open(message, 'X', {
+      panelClass: 'custom-snackbar',
+      verticalPosition: 'top',
+    });
   }
 }

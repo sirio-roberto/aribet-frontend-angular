@@ -4,17 +4,23 @@ main {
   align-items: center;
 }
 
+.app-name {
+  color: var(--secondary-color);
+  font-size: 4.2em;
+  font-weight: 600;
+  margin: 50px 0 30px 0;
+}
+
 .listing {
-  background: var(--accent-color);
   border-radius: 30px;
   padding: 30px;
   width: 500px;
   align-items: center;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 .section-heading {
-  color: var(--secondary-color);
   font-size: 24pt;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
   text-align: center;
 }
 
@@ -25,6 +31,15 @@ button[type='submit'] {
   font-size: 20px;
 }
 
+button[type='submit'] {
+  height: 56px;
+}
+
 mat-card-content {
   width: 100%;
+}
+
+.custom-snackbar {
+  font-size: 30px;
+  color: red;
 }

@@ -12,7 +12,9 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    return this.token || localStorage.getItem('access_token');
+    return this.token !== undefined
+      ? this.token
+      : localStorage.getItem('access_token');
   }
 
   clearToken(): void {

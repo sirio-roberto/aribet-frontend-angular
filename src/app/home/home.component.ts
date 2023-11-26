@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HousingLocationComponent } from '../housing-location/housing-location.component';
 import { HousingService } from '../housing.service';
 import { HousingLocation } from '../housinglocation';
+import { AuthInterceptor } from '../auth.interceptor';
 
 @Component({
   selector: 'app-home',
@@ -21,6 +22,12 @@ export class HomeComponent {
       this.housingLocationList = housingLocationList;
       this.filteredLocationList = housingLocationList;
     });
+  }
+
+  testingToken() {
+    this.housingService
+      .testingToken()
+      .subscribe({ complete: console.log, error: console.error });
   }
 
   filterResults(text: string) {

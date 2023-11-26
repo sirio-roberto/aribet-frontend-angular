@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HousingLocation } from './housinglocation';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HousingService {
+  constructor(private http: HttpClient) {}
+
   private readonly backendUrl = 'http://localhost:3000';
   private readonly baseUrl = 'https://angular.dev/assets/tutorials/common';
 
@@ -64,5 +68,15 @@ export class HousingService {
       this.baseUrl
     );
     return housingLocation;
+  }
+
+  testingToken(): Observable<any> {
+    const signUpUrl = `${this.backendUrl}/bets`;
+    const body = {
+      time: '2023-11-26T22:01:17.400Z',
+      description: 'Test',
+    };
+
+    return this.http.post(signUpUrl, body);
   }
 }

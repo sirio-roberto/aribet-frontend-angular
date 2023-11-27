@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
+import { CreateBetComponent } from './create-bet/create-bet.component';
 
 const routeConfig: Routes = [
   {
@@ -18,6 +19,11 @@ const routeConfig: Routes = [
     path: 'signup',
     component: SignupComponent,
     title: 'Sign up',
+  },
+  {
+    path: 'bets/create',
+    component: CreateBetComponent,
+    title: 'Create bet',
   },
 ];
 

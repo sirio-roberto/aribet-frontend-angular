@@ -4,7 +4,6 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { BetService } from '../bet.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -20,7 +19,6 @@ import { Router } from '@angular/router';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule,
     MatCardModule,
   ],
   templateUrl: './signin.component.html',
@@ -28,10 +26,8 @@ import { Router } from '@angular/router';
 })
 export class SigninComponent {
   applyForm = new FormGroup({
-    name: new FormControl(''),
     email: new FormControl(''),
     password: new FormControl(''),
-    confirmPassword: new FormControl(''),
   });
 
   constructor(
@@ -54,7 +50,7 @@ export class SigninComponent {
           .subscribe({
             next: (data) => {
               this.authService.setToken(data.access_token);
-              this.router.navigate(['/']);
+              this.router.navigate(['/bets/create']);
             },
             error: (err) => {
               if (err.status >= 400 && err.status < 500) {

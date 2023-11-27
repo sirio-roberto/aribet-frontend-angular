@@ -1,0 +1,29 @@
+<main>
+  <h1 class="app-name">Aribet</h1>
+  <mat-card mat-elevation-z12>
+    <mat-card-header>
+      <mat-card-title>Today's bet</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="applyForm">
+        <mat-form-field appearance="outline">
+          <mat-label>Time</mat-label>
+          <input matInput type="time" formControlName="time" required />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Description</mat-label>
+          <input matInput type="text" formControlName="description" />
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          (click)="create()"
+        >
+          Create
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</main>

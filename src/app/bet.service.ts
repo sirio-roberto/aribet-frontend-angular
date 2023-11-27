@@ -46,4 +46,15 @@ export class BetService {
 
     return this.http.post(signUpUrl, body);
   }
+
+  createBet(time: string, description?: string): Observable<any> {
+    console.log(time);
+    const url = `${this.backendUrl}/bets`;
+    const body = {
+      time,
+      description,
+    };
+
+    return this.http.post(url, body);
+  }
 }

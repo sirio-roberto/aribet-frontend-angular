@@ -4,6 +4,7 @@ import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 import { CreateBetComponent } from './create-bet/create-bet.component';
 import { ViewBetComponent } from './view-bet/view-bet.component';
+import { BetListComponent } from './bet-list/bet-list.component';
 
 const routeConfig: Routes = [
   {
@@ -30,6 +31,11 @@ const routeConfig: Routes = [
     path: 'bets/view',
     component: ViewBetComponent,
     title: "Today's bet",
+  },
+  {
+    path: 'today/result',
+    component: BetListComponent,
+    title: "Today's result",
   },
 ];
 

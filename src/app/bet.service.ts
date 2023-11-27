@@ -80,4 +80,9 @@ export class BetService {
     const url = `${this.backendUrl}/bets/today`;
     return this.http.get(url);
   }
+
+  getAllTodaysBets(): Observable<any> {
+    const url = `${this.backendUrl}/bets/today/all`;
+    return this.http.get(url);
+  }
 }

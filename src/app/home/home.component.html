@@ -41,6 +41,14 @@
         *ngIf="authService.getToken()"
         mat-raised-button
         color="primary"
+        (click)="navigateToTodaysResult()"
+      >
+        Today's result
+      </button>
+      <button
+        *ngIf="authService.getToken()"
+        mat-raised-button
+        color="primary"
         (click)="logOut()"
       >
         Log Out

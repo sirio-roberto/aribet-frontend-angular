@@ -48,7 +48,6 @@ export class BetService {
   }
 
   createBet(time: string, description?: string): Observable<any> {
-    console.log(time);
     const url = `${this.backendUrl}/bets`;
     const body = {
       time,
@@ -58,8 +57,27 @@ export class BetService {
     return this.http.post(url, body);
   }
 
+  updateBet(
+    betId: number,
+    time: string,
+    description?: string
+  ): Observable<any> {
+    const url = `${this.backendUrl}/bets/${betId}`;
+    const body = {
+      time,
+      description,
+    };
+
+    return this.http.patch(url, body);
+  }
+
   hasBetToday(): Observable<boolean> {
     const url = `${this.backendUrl}/bets/hasBetToday`;
     return this.http.get<boolean>(url);
+  }
+
+  getTodaysBet(): Observable<any> {
+    const url = `${this.backendUrl}/bets/today`;
+    return this.http.get(url);
   }
 }

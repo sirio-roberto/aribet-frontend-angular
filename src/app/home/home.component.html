@@ -22,20 +22,28 @@
         Sign Up
       </button>
       <button
-        *ngIf="authService.getToken()"
-        mat-raised-button
-        color="primary"
-        (click)="logOut()"
-      >
-        Log Out
-      </button>
-      <button
         *ngIf="authService.getToken() && !hasBetToday"
         mat-raised-button
         color="primary"
         (click)="navigateToCreateBet()"
       >
         Create bet
+      </button>
+      <button
+        *ngIf="authService.getToken() && hasBetToday"
+        mat-raised-button
+        color="primary"
+        (click)="navigateToViewBet()"
+      >
+        Today's bet
+      </button>
+      <button
+        *ngIf="authService.getToken()"
+        mat-raised-button
+        color="primary"
+        (click)="logOut()"
+      >
+        Log Out
       </button>
     </mat-card-content>
   </mat-card>

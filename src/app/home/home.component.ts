@@ -53,6 +53,9 @@ export class HomeComponent implements OnInit {
   navigateToCreateBet() {
     this.router.navigate(['/bets/create']);
   }
+  navigateToViewBet() {
+    this.router.navigate(['/bets/view']);
+  }
   logOut() {
     this.authService.clearToken();
   }

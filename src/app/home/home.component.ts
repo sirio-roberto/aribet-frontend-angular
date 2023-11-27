@@ -16,6 +16,6 @@ export class HomeComponent {
   testingToken() {
     this.housingService
       .testingToken()
-      .subscribe({ complete: console.log, error: console.error });
+      .subscribe({ next: console.log, error: console.error });
   }
 }

@@ -27,8 +27,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./signin.component.css'],
 })
 export class SigninComponent {
-  hidePass = true;
-
   applyForm = new FormGroup({
     name: new FormControl(''),
     email: new FormControl(''),
@@ -37,47 +35,36 @@ export class SigninComponent {
   });
 
   constructor(
-    private housingService: BetService,
+    private betService: BetService,
     private snackBar: MatSnackBar,
     private router: Router,
     private authService: AuthService
   ) {}
 
-  async signUp() {
-    if (
-      !this.applyForm.value.name ||
-      !this.applyForm.value.email ||
-      !this.applyForm.value.password ||
-      !this.applyForm.value.confirmPassword
-    ) {
+  signIn() {
+    if (!this.applyForm.value.email || !this.applyForm.value.password) {
       this.showSnackBarError('Please fill in all required fields');
-    } else if (
-      this.applyForm.value.password.length < 6 ||
-      this.applyForm.value.confirmPassword.length < 6
-    ) {
-      this.showSnackBarError('Passwords should have at least 6 characters');
-    } else if (
-      this.applyForm.value.password !== this.applyForm.value.confirmPassword
-    ) {
-      this.showSnackBarError('Passwords do not match');
     } else {
-      const backendResponse: any = await this.housingService.signUp(
-        this.applyForm.value.name ?? '',
-        this.applyForm.value.email ?? '',
-        this.applyForm.value.password ?? '',
-        this.applyForm.value.confirmPassword ?? ''
-      );
-
-      if (backendResponse.access_token) {
-        this.authService.setToken(backendResponse.access_token);
-        this.router.navigate(['/']);
-      } else if (JSON.stringify(backendResponse).includes('email')) {
-        this.showSnackBarError(
-          'This email was already taken. Please use a different email'
-        );
-      } else {
-        this.showSnackBarError('Unknown error');
-      }
+      try {
+        this.betService
+          .signIn(
+            this.applyForm.value.email ?? '',
+            this.applyForm.value.password ?? ''
+          )
+          .subscribe({
+            next: (data) => {
+              this.authService.setToken(data.access_token);
+              this.router.navigate(['/']);
+            },
+            error: (err) => {
+              if (err.status >= 400 && err.status < 500) {
+                this.showSnackBarError('Wrong email or password');
+              } else {
+                this.showSnackBarError('Unknown error');
+              }
+            },
+          });
+      } catch {}
     }
   }
 

@@ -33,6 +33,16 @@ export class BetService {
     return access_token;
   }
 
+  signIn(email: string, password: string): Observable<any> {
+    const url = `${this.backendUrl}/auth/signin`;
+    const body = {
+      email,
+      password,
+    };
+
+    return this.http.post(url, body);
+  }
+
   testingToken(): Observable<any> {
     const signUpUrl = `${this.backendUrl}/bets`;
     const body = {

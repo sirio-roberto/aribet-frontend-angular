@@ -10,3 +10,10 @@ header {
 .content {
   padding: var(--content-padding);
 }
+
+mat-icon {
+  font-size: 40px;
+  width: 50px;
+  height: 60px;
+  padding: 10px;
+}

@@ -37,7 +37,7 @@ export class SignupComponent {
   });
 
   constructor(
-    private housingService: BetService,
+    private betService: BetService,
     private snackBar: MatSnackBar,
     private router: Router,
     private authService: AuthService
@@ -61,23 +61,28 @@ export class SignupComponent {
     ) {
       this.showSnackBarError('Passwords do not match');
     } else {
-      const backendResponse: any = await this.housingService.signUp(
-        this.applyForm.value.name ?? '',
-        this.applyForm.value.email ?? '',
-        this.applyForm.value.password ?? '',
-        this.applyForm.value.confirmPassword ?? ''
-      );
-
-      if (backendResponse.access_token) {
-        this.authService.setToken(backendResponse.access_token);
-        this.router.navigate(['/']);
-      } else if (JSON.stringify(backendResponse).includes('email')) {
-        this.showSnackBarError(
-          'This email was already taken. Please use a different email'
-        );
-      } else {
-        this.showSnackBarError('Unknown error');
-      }
+      this.betService
+        .signUp(
+          this.applyForm.value.name ?? '',
+          this.applyForm.value.email ?? '',
+          this.applyForm.value.password ?? '',
+          this.applyForm.value.confirmPassword ?? ''
+        )
+        .subscribe({
+          next: (data) => {
+            this.authService.setToken(data.access_token);
+            this.router.navigate(['/']);
+          },
+          error: (err) => {
+            if (JSON.stringify(err).includes('email')) {
+              this.showSnackBarError(
+                'This email was already taken. Please use a different email'
+              );
+            } else {
+              this.showSnackBarError('Unknown error');
+            }
+          },
+        });
     }
   }
 

@@ -10,27 +10,21 @@ export class BetService {
 
   private readonly backendUrl = 'http://localhost:3000';
 
-  async signUp(
+  signUp(
     name: string,
     email: string,
     password: string,
     confirmPassword: string
-  ) {
-    const signUpUrl = `${this.backendUrl}/auth/signup`;
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name,
-        email,
-        password,
-        confirmPassword,
-      }) as BodyInit,
+  ): Observable<any> {
+    const url = `${this.backendUrl}/auth/signup`;
+    const body = {
+      name,
+      email,
+      password,
+      confirmPassword,
     };
-    const data = await fetch(signUpUrl, requestOptions);
-    const access_token = await data.json();
-    console.log(access_token);
-    return access_token;
+
+    return this.http.post(url, body);
   }
 
   signIn(email: string, password: string): Observable<any> {

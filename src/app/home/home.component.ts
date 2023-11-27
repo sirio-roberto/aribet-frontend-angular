@@ -1,43 +1,21 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HousingLocationComponent } from '../housing-location/housing-location.component';
-import { HousingService } from '../housing.service';
-import { HousingLocation } from '../housinglocation';
-import { AuthInterceptor } from '../auth.interceptor';
+import { BetService } from '../bet.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, HousingLocationComponent],
-  providers: [HousingService],
+  imports: [CommonModule],
+  providers: [BetService],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-  housingLocationList: HousingLocation[] = [];
-  filteredLocationList: HousingLocation[] = [];
-
-  constructor(private housingService: HousingService) {
-    this.housingService.getAllHousingLocations().then((housingLocationList) => {
-      this.housingLocationList = housingLocationList;
-      this.filteredLocationList = housingLocationList;
-    });
-  }
+  constructor(private housingService: BetService) {}
 
   testingToken() {
     this.housingService
       .testingToken()
       .subscribe({ complete: console.log, error: console.error });
-  }
-
-  filterResults(text: string) {
-    if (!text) {
-      this.filteredLocationList = this.housingLocationList;
-    }
-
-    this.filteredLocationList = this.housingLocationList.filter(
-      (housingLocation) =>
-        housingLocation?.city.toLowerCase().includes(text.toLowerCase())
-    );
   }
 }

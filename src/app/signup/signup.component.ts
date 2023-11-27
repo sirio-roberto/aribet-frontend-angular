@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { HousingService } from '../housing.service';
+import { BetService } from '../bet.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -37,7 +37,7 @@ export class SignupComponent {
   });
 
   constructor(
-    private housingService: HousingService,
+    private housingService: BetService,
     private snackBar: MatSnackBar,
     private router: Router,
     private authService: AuthService

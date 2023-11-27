@@ -37,16 +37,6 @@ export class BetService {
     return this.http.post(url, body);
   }
 
-  testingToken(): Observable<any> {
-    const signUpUrl = `${this.backendUrl}/bets`;
-    const body = {
-      time: '2023-11-26T22:01:17.400Z',
-      description: 'Test',
-    };
-
-    return this.http.post(signUpUrl, body);
-  }
-
   createBet(time: string, description?: string): Observable<any> {
     const url = `${this.backendUrl}/bets`;
     const body = {
@@ -83,6 +73,11 @@ export class BetService {
 
   getAllTodaysBets(): Observable<any> {
     const url = `${this.backendUrl}/bets/today/all`;
+    return this.http.get(url);
+  }
+
+  getTodaysResult(): Observable<any> {
+    const url = `${this.backendUrl}/results/today/winner`;
     return this.http.get(url);
   }
 }

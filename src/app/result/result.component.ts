@@ -9,10 +9,9 @@ import { MatTableModule } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { BetService } from '../bet.service';
-import { Bet } from '../interface/bet.interface';
 
 @Component({
-  selector: 'app-bet-list',
+  selector: 'app-result',
   standalone: true,
   imports: [
     CommonModule,
@@ -23,12 +22,12 @@ import { Bet } from '../interface/bet.interface';
     MatCardModule,
     MatTableModule,
   ],
-  templateUrl: './bet-list.component.html',
-  styleUrls: ['./bet-list.component.css'],
+  templateUrl: './result.component.html',
+  styleUrls: ['./result.component.css'],
 })
-export class BetListComponent {
-  displayedColumns: string[] = ['userId', 'time', 'description'];
-  dataSource: Bet[] = [];
+export class ResultComponent {
+  displayedColumns: string[] = ['name', 'description', 'time', 'resultTime'];
+  dataSource: any[] = [];
 
   constructor(
     private betService: BetService,
@@ -41,14 +40,13 @@ export class BetListComponent {
   }
 
   getAllTodaysBets() {
-    this.betService.getAllTodaysBets().subscribe({
+    this.betService.getTodaysResult().subscribe({
       next: (data: any[]) => {
-        this.dataSource = data.map((bet) => ({
-          id: bet.id,
-          time: this.getFormattedTime(bet.time),
-          description: bet.description,
-          userId: bet.userId,
-          resultId: bet.resultId,
+        this.dataSource = data.map((winner) => ({
+          name: winner.name,
+          description: winner.description,
+          time: winner.guessedTime,
+          resultTime: winner.finalTime,
         }));
       },
       error: (error) => {

@@ -5,6 +5,7 @@ import { SignupComponent } from './signup/signup.component';
 import { CreateBetComponent } from './create-bet/create-bet.component';
 import { ViewBetComponent } from './view-bet/view-bet.component';
 import { BetListComponent } from './bet-list/bet-list.component';
+import { ResultComponent } from './result/result.component';
 
 const routeConfig: Routes = [
   {
@@ -33,8 +34,13 @@ const routeConfig: Routes = [
     title: "Today's bet",
   },
   {
-    path: 'today/result',
+    path: 'today/bets',
     component: BetListComponent,
+    title: "Today's list",
+  },
+  {
+    path: 'today/result',
+    component: ResultComponent,
     title: "Today's result",
   },
 ];

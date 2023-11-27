@@ -57,4 +57,9 @@ export class BetService {
 
     return this.http.post(url, body);
   }
+
+  hasBetToday(): Observable<boolean> {
+    const url = `${this.backendUrl}/bets/hasBetToday`;
+    return this.http.get<boolean>(url);
+  }
 }

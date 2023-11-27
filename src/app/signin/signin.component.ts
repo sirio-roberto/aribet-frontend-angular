@@ -50,7 +50,7 @@ export class SigninComponent {
           .subscribe({
             next: (data) => {
               this.authService.setToken(data.access_token);
-              this.router.navigate(['/bets/create']);
+              this.router.navigate(['/']);
             },
             error: (err) => {
               if (err.status >= 400 && err.status < 500) {

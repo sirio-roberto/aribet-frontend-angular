@@ -31,7 +31,6 @@ export class AppComponent {
   ) {}
 
   updateResult() {
-    console.log(this.resultTime);
     if (this.resultTime) {
       this.betService.updateResult(this.resultTime).subscribe({
         next: (data) => console.log(data),

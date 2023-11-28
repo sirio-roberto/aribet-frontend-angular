@@ -54,7 +54,8 @@ export class CreateBetComponent {
               console.log(data);
               this.router.navigate(['/']);
             },
-            error: () => this.showSnackBarError('Unknown error'),
+            error: (err) =>
+              this.showSnackBarError(err.error?.message || 'Unknown error'),
           });
       } catch {}
     }

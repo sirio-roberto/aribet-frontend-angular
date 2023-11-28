@@ -26,6 +26,7 @@ import { AuthService } from '../auth.service';
 })
 export class HomeComponent implements OnInit {
   hasBetToday = false;
+  showWinner = false;
 
   constructor(
     private router: Router,
@@ -35,6 +36,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkBetStatus();
+    this.hasWinner();
   }
 
   checkBetStatus() {
@@ -63,5 +65,12 @@ export class HomeComponent implements OnInit {
   }
   logOut() {
     this.authService.clearToken();
+  }
+
+  hasWinner() {
+    this.betService.getTodaysResult().subscribe({
+      next: (data) => (this.showWinner = !!data && data.length > 0),
+      error: console.error,
+    });
   }
 }

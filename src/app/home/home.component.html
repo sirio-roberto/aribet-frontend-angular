@@ -46,7 +46,7 @@
         Today's list
       </button>
       <button
-        *ngIf="authService.getToken()"
+        *ngIf="authService.getToken() && showWinner"
         mat-raised-button
         color="primary"
         (click)="navigateToTodaysResult()"

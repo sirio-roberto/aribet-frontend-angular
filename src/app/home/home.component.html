@@ -22,7 +22,7 @@
         Sign Up
       </button>
       <button
-        *ngIf="authService.getToken() && !hasBetToday"
+        *ngIf="authService.getToken() && !hasWinner && !hasBetToday"
         mat-raised-button
         color="primary"
         (click)="navigateToCreateBet()"

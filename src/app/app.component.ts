@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
@@ -28,7 +28,9 @@ export class AppComponent {
   constructor(
     protected authService: AuthService,
     private betService: BetService
-  ) {}
+  ) {
+    this.getResult();
+  }
 
   updateResult() {
     if (this.resultTime) {
@@ -37,5 +39,12 @@ export class AppComponent {
         error: (err) => console.error(err),
       });
     }
+  }
+
+  getResult() {
+    this.betService.getTodaysResult().subscribe({
+      next: (data) => (this.resultTime = data[0]?.finalTime),
+      error: (err) => console.error(err),
+    });
   }
 }

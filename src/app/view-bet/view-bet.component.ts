@@ -27,6 +27,7 @@ import { BetService } from '../bet.service';
   styleUrls: ['./view-bet.component.css'],
 })
 export class ViewBetComponent implements OnInit {
+  showEdit = true;
   isDisabled: boolean = true;
   betId: number = 0;
 
@@ -41,7 +42,6 @@ export class ViewBetComponent implements OnInit {
   constructor(
     private betService: BetService,
     private snackBar: MatSnackBar,
-    private router: Router,
     private authService: AuthService
   ) {}
 
@@ -62,6 +62,8 @@ export class ViewBetComponent implements OnInit {
         }
       },
     });
+
+    this.hasWinner();
   }
 
   edit() {
@@ -96,6 +98,13 @@ export class ViewBetComponent implements OnInit {
     this.snackBar.open(message, 'X', {
       panelClass: 'custom-snackbar',
       verticalPosition: 'top',
+    });
+  }
+
+  hasWinner() {
+    this.betService.getTodaysResult().subscribe({
+      next: (data) => (this.showEdit = !!data && data.length === 0),
+      error: console.error,
     });
   }
 }

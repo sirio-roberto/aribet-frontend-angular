@@ -6,7 +6,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
-import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { BetService } from '../bet.service';
 import { Bet } from '../interface/bet.interface';
@@ -27,12 +26,11 @@ import { Bet } from '../interface/bet.interface';
   styleUrls: ['./bet-list.component.css'],
 })
 export class BetListComponent {
-  displayedColumns: string[] = ['userId', 'time', 'description'];
+  displayedColumns: string[] = ['user.name', 'time', 'description'];
   dataSource: Bet[] = [];
 
   constructor(
     private betService: BetService,
-    private router: Router,
     private authService: AuthService
   ) {}
 
@@ -47,7 +45,7 @@ export class BetListComponent {
           id: bet.id,
           time: this.getFormattedTime(bet.time),
           description: bet.description,
-          userId: bet.userId,
+          user: bet.user,
           resultId: bet.resultId,
         }));
       },

@@ -7,6 +7,15 @@
         fontIcon="home"
       ></mat-icon>
     </a>
+    <mat-form-field appearance="outline" *ngIf="authService.getToken()">
+      <mat-label>Result</mat-label>
+      <input
+        matInput
+        type="time"
+        (blur)="updateResult()"
+        [(ngModel)]="resultTime"
+      />
+    </mat-form-field>
   </header>
   <section class="content">
     <router-outlet></router-outlet>

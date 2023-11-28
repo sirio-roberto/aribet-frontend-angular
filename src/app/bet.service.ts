@@ -80,4 +80,9 @@ export class BetService {
     const url = `${this.backendUrl}/results/today/winner`;
     return this.http.get(url);
   }
+
+  updateResult(time: string): Observable<any> {
+    const url = `${this.backendUrl}/results/today`;
+    return this.http.post(url, { time });
+  }
 }

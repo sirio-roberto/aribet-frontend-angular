@@ -17,3 +17,8 @@ mat-icon {
   height: 60px;
   padding: 10px;
 }
+
+mat-form-field {
+  float: right;
+  margin-right: 15px;
+}

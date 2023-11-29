@@ -1,6 +1,6 @@
 # Aribet Angular Frontend
 
-This is the Angular frontend for the Aribet application, which interacts with the NestJS backend to provide a user interface for managing bets.
+This is the Angular frontend for the Aribet application, which interacts with the [NestJS backend](https://github.com/sirio-roberto/aribet-backend-nestjs) to provide a user interface for managing bets.
 
 ## Table of Contents
 
